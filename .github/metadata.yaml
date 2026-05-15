@@ -1,0 +1,10 @@
+# .github/metadata.yaml
+description: "Byte type for Swift — atomic binary data unit distinct from UInt8, with bitwise ops, hex accessor, and Carrier.Protocol conformance."
+topics:
+  - primitives
+  - byte
+  - binary
+  - type-safety
+homepage: "https://swift-institute.org"
+readme:
+  family: E
