@@ -8,14 +8,17 @@
 /// `Byte` participates in byte-stream domains (file content, network payloads,
 /// hex encodings, parser inputs).
 ///
-/// `Byte` conforms to `Carrier.\`Protocol\`` with `Underlying = UInt8` and
-/// `Domain = Never`. Construction and underlying access flow through the carrier
-/// machinery; bitwise operations are forwarded to the underlying byte; arithmetic
-/// is deliberately NOT forwarded (bytes are not numbers).
+/// `Byte` conforms to `Byte.\`Protocol\`` (which refines
+/// `Carrier.\`Protocol\`<UInt8>` plus the stdlib basics — `Sendable`,
+/// `Equatable`, `Hashable`, `Comparable`, `ExpressibleByIntegerLiteral`).
+/// All behavior — bitwise ops, equality, ordering, hashing, literal init,
+/// `.zero` / `.max` constants — lives on `Byte.\`Protocol\``; this file
+/// carries only the storage, the Carrier-required initializer, and the
+/// Sendable conformance declaration (same-file rule).
 ///
 /// ```swift
 /// let b: Byte = 0xFF
-/// let masked = b & 0x0F          // .init(rawValue: 0x0F)
+/// let masked = b & 0x0F          // Byte(0x0F)
 /// let raw = b.underlying          // UInt8 = 255
 /// ```
 ///
@@ -32,13 +35,13 @@
 /// friction is intentional per `[PRIM-FOUND-004]`.
 @frozen
 public struct Byte {
-    /// The underlying 8-bit unsigned integer.
-    public let rawValue: UInt8
+    /// The underlying 8-bit unsigned integer this byte carries.
+    public let underlying: UInt8
 
-    /// Creates a byte from a raw unsigned 8-bit integer.
+    /// Creates a byte from its underlying 8-bit unsigned integer.
     @inlinable
-    public init(rawValue: UInt8) {
-        self.rawValue = rawValue
+    public init(_ underlying: consuming UInt8) {
+        self.underlying = underlying
     }
 }
 

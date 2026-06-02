@@ -1,0 +1,10 @@
+# SwiftLint configuration
+# Inherits from the shared parent configuration in swift-primitives
+
+parent_config: https://raw.githubusercontent.com/swift-primitives/.github/main/.swiftlint.yml
+
+# Package-specific overrides
+disabled_rules:
+  - function_parameter_count
+  - typed_throws_required   # stdlib Codable witnesses (init(from: any Decoder) throws / encode(to:)) — untyped throws is protocol-mandated. Per principal 2026-06-02.
+  - no_any_protocol_existential   # over-fires on the word "any" in DESIGN COMMENTS (no match_kinds); byte uses no `any` existentials in code. Per principal 2026-06-02.

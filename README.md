@@ -14,10 +14,10 @@ A typed byte primitive — `Byte`, the atomic unit of binary data, distinct from
 import Byte_Primitives
 
 let b: Byte = 0xFF                    // ExpressibleByIntegerLiteral
-let masked = b & 0x0F                  // Byte(rawValue: 0x0F)
-let toggled = b ^ 0xFF                 // Byte(rawValue: 0x00)
-let inverted = ~b                      // Byte(rawValue: 0x00)
-let shifted = Byte(rawValue: 0x01) << 4  // Byte(rawValue: 0x10)
+let masked = b & 0x0F                  // Byte(0x0F)
+let toggled = b ^ 0xFF                 // Byte(0x00)
+let inverted = ~b                      // Byte(0x00)
+let shifted = Byte(0x01) << 4          // Byte(0x10)
 
 // Carrier round-trip
 let raw: UInt8 = b.underlying          // 255
@@ -26,12 +26,9 @@ let restored = Byte(raw)               // == b
 
 ### Hex (and other base) encoding
 
-Hex rendering is NOT part of `Byte`. Use the encoder packages:
+Hex rendering is NOT part of `Byte`. Use a dedicated encoder package — `swift-binary-base-primitives` (`Binary.Base.16`, for Base16/Base32/Base64/Base85) or [`swift-rfc-4648`](https://github.com/swift-ietf/swift-rfc-4648) (`RFC_4648.Base16`, the canonical RFC 4648 encoder).
 
-- [`swift-binary-base-primitives`](https://github.com/swift-primitives/swift-binary-base-primitives) — `Binary.Base.16` (Base16/Base32/Base32Hex/Base58/Base62/Base64/Base85)
-- [`swift-rfc-4648`](https://github.com/swift-ietf/swift-rfc-4648) — `RFC_4648.Base16` (the canonical RFC 4648 Base16 encoder)
-
-The institute's L1 String-conversion friction is intentional per [PRIM-FOUND-004] — `Byte` stays narrow; encoding belongs to encoders.
+This narrowness is deliberate: `Byte` stays a pure binary unit, and encoding belongs to the encoder packages.
 
 ### UInt8 ↔ Byte bridges
 
@@ -96,6 +93,19 @@ Foundation-free.
 | Embedded Swift | ✅ |
 
 ---
+
+## Related Packages
+
+- [`swift-carrier-primitives`](https://github.com/swift-primitives/swift-carrier-primitives) — `Carrier.Protocol`, the phantom-typed wrapper protocol `Byte` conforms to (`Underlying = UInt8`, `Domain = Never`).
+- [`swift-tagged-primitives`](https://github.com/swift-primitives/swift-tagged-primitives) — phantom-type infrastructure underlying the `Carrier` surface.
+- [`swift-ownership-primitives`](https://github.com/swift-primitives/swift-ownership-primitives) — ownership and lifetime annotations used across the primitive.
+
+---
+
+## Community
+
+<!-- BEGIN: discussion -->
+<!-- END: discussion -->
 
 ## License
 
