@@ -45,6 +45,7 @@ let package = Package(
         .package(url: "https://github.com/swift-primitives/swift-carrier-primitives.git", branch: "main"),
         .package(url: "https://github.com/swift-primitives/swift-tagged-primitives.git", branch: "main"),
         .package(url: "https://github.com/swift-primitives/swift-ownership-primitives.git", branch: "main"),
+        .package(path: "../swift-span-primitives"),
     ],
     targets: [
         .target(
@@ -63,6 +64,7 @@ let package = Package(
             dependencies: [
                 "Byte Protocol Primitives",
                 .product(name: "Ownership Primitives", package: "swift-ownership-primitives"),
+                .product(name: "Span Protocol Primitives", package: "swift-span-primitives"),
             ]
         ),
         .target(

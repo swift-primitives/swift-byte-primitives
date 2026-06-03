@@ -30,10 +30,11 @@ extension Byte {
     /// storage (the Span) and encodes a type-level invariant (the borrow
     /// lifetime).
     ///
-    /// Conforms to ``Memory/Contiguous/Borrowed/Protocol`` with
-    /// `Element == Byte`, providing the unified read-access contract that
-    /// `Cursor<DomainTag>` operations (peek/advance/consume/seek)
-    /// parameterize on.
+    /// Conforms to ``Span/Borrowed/Protocol`` with `Element == Byte`,
+    /// providing the unified read-access contract that `Cursor<DomainTag>`
+    /// operations (peek/advance/consume/seek) parameterize on. (The neutral
+    /// span protocol lives in swift-span-primitives; `Swift.Span<Byte>` itself
+    /// also conforms by identity.)
     ///
     /// ## Span<Byte> substrate (W2 cascade landed)
     ///
@@ -92,8 +93,10 @@ extension Byte {
 
 extension Byte: Ownership.Borrow.`Protocol` {}
 
-// Note: Byte.Borrowed conforms to `Memory.Contiguous.Borrowed.Protocol` (with
-// `Element == Byte`); that conformance is declared in swift-memory-primitives
-// (Memory Contiguous Primitives target) because memory is the smaller domain
-// that depends on byte, not the other way around. See
-// `swift-memory-primitives/Sources/Memory Contiguous Primitives/Memory.Contiguous+Byte.Borrowed.swift`.
+// Note: Byte.Borrowed's borrowed-span capability conformance is to the
+// namespace-neutral `Span.Borrowed.`Protocol`` (with `Element == Byte`),
+// declared in this package — see
+// `Byte.Borrowed+Span.Borrowed.Protocol.swift`. This replaces the former
+// memory-domain borrowed-span protocol conformance (W2 decouple): the neutral
+// span protocol lets byte/binary/memory each conform without a cross-domain
+// edge, and byte no longer depends on memory.
