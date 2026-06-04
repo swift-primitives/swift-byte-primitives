@@ -12,7 +12,7 @@
 // W3 PRUNE: the nominal `Byte.Borrowed` struct is DELETED. Its role — a
 // `~Copyable & ~Escapable` borrow-view over `Swift.Span<Byte>` — is now
 // played by bare `Swift.Span<Byte>` itself, which IS the borrowed-span
-// capability by identity (`Swift.Span: Span.Borrowed.`Protocol`` — the
+// capability by identity (`Swift.Span: Span.`Protocol`` — the
 // linchpin conformance in swift-span-primitives). Every member the nominal
 // vended (`span`, `init(_ span:)`, `count`) is native to `Swift.Span`, so
 // there is no byte-domain span API to re-home — the nominal was a pure
@@ -39,7 +39,7 @@ public import Ownership_Primitives
 /// `Swift.Span<Byte>` satisfies the associated-type constraint
 /// `Borrowed: ~Copyable, ~Escapable`: it is `~Escapable` (its scope is its
 /// lifetime) and carries the byte-domain read-access contract through its
-/// identity conformance to ``Span/Borrowed/Protocol``.
+/// identity conformance to ``Span/Protocol``.
 extension Byte: Ownership.Borrow.`Protocol` {
     public typealias Borrowed = Swift.Span<Byte>
 }
