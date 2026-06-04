@@ -41,5 +41,6 @@ public import Ownership_Primitives
 /// lifetime) and carries the byte-domain read-access contract through its
 /// identity conformance to ``Span/Protocol``.
 extension Byte: Ownership.Borrow.`Protocol` {
+    /// The borrowed projection of the byte domain: bare `Swift.Span<Byte>`.
     public typealias Borrowed = Swift.Span<Byte>
 }
