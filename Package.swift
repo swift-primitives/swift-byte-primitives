@@ -45,7 +45,7 @@ let package = Package(
         .package(url: "https://github.com/swift-primitives/swift-carrier-primitives.git", branch: "main"),
         .package(url: "https://github.com/swift-primitives/swift-tagged-primitives.git", branch: "main"),
         .package(url: "https://github.com/swift-primitives/swift-ownership-primitives.git", branch: "main"),
-        .package(path: "../swift-span-primitives"),
+        .package(url: "https://github.com/swift-primitives/swift-span-primitives.git", branch: "main"),
     ],
     targets: [
         .target(
