@@ -65,6 +65,28 @@ extension String {
     public init<X: Byte.`Protocol`>(_ value: X, radix: Int) {
         self.init(value.byte.underlying, radix: radix)
     }
+
+    /// Creates a string by decoding the given UTF-8 `Byte` array.
+    ///
+    /// Unlabeled convenience over `String(decoding:as:)`. Relocated from
+    /// swift-binary-primitives during the truly-primitive cleanup — UTF-8
+    /// `Byte`→`String` interop is byte-domain stdlib interop, orthogonal to
+    /// the binary endianness/codec namespace.
+    ///
+    /// ```swift
+    /// let bytes: [Byte] = [72, 101, 108, 108, 111]
+    /// let string = String(bytes)    // "Hello"
+    /// ```
+    @inlinable
+    public init(_ bytes: [Byte]) {
+        self.init(decoding: bytes, as: Swift.UTF8.self)
+    }
+
+    /// Creates a string by decoding the given UTF-8 `Byte` array slice.
+    @inlinable
+    public init(_ bytes: ArraySlice<Byte>) {
+        self.init(decoding: bytes, as: Swift.UTF8.self)
+    }
 }
 
 extension Unicode.Scalar {
