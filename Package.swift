@@ -29,6 +29,10 @@ let package = Package(
             targets: ["Byte Tagged Primitives"]
         ),
         .library(
+            name: "Byte Bit Primitives",
+            targets: ["Byte Bit Primitives"]
+        ),
+        .library(
             name: "Byte Primitives",
             targets: ["Byte Primitives"]
         ),
@@ -45,6 +49,7 @@ let package = Package(
         .package(url: "https://github.com/swift-primitives/swift-carrier-primitives.git", branch: "main"),
         .package(url: "https://github.com/swift-primitives/swift-tagged-primitives.git", branch: "main"),
         .package(url: "https://github.com/swift-primitives/swift-ownership-primitives.git", branch: "main"),
+        .package(url: "https://github.com/swift-primitives/swift-bit-primitives.git", branch: "main"),
     ],
     targets: [
         .target(
@@ -70,6 +75,14 @@ let package = Package(
             dependencies: [
                 "Byte Protocol Primitives",
                 .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
+            ]
+        ),
+        .target(
+            name: "Byte Bit Primitives",
+            dependencies: [
+                "Byte Primitive",
+                .product(name: "Bit Primitive", package: "swift-bit-primitives"),
+                .product(name: "Bit Pattern Primitives", package: "swift-bit-primitives"),
             ]
         ),
         .target(
@@ -110,6 +123,15 @@ let package = Package(
                 "Byte Primitives",
                 "Byte Primitives Standard Library Integration",
                 "Byte Primitives Test Support",
+            ]
+        ),
+        .testTarget(
+            name: "Byte Bit Primitives Tests",
+            dependencies: [
+                "Byte Bit Primitives",
+                "Byte Primitives Test Support",
+                .product(name: "Bit Primitive", package: "swift-bit-primitives"),
+                .product(name: "Bit Pattern Primitives", package: "swift-bit-primitives"),
             ]
         ),
     ],
