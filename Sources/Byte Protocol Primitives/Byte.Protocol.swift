@@ -139,6 +139,9 @@ extension Byte {
 // conformances (Underlying: Equatable → Tagged: Equatable, etc.) and
 // through Tagged+Literals.swift's SLI conformance.
 
+// Conformance clause names the protocol being conformed to; `Self` is invalid here
+// (cf. Plist.Serializable precedent).
+// swiftlint:disable:next prefer_self_in_static_references
 extension Byte: Byte.`Protocol` {
     /// Bare bytes are unscoped.
     public typealias Domain = Never
