@@ -18,8 +18,8 @@ let package = Package(
         .executableTarget(
             name: "byte-bit-bench",
             dependencies: [
-                .product(name: "Byte Bit Primitives", package: "byte-bit-decomposition"),
-                .product(name: "Byte Primitive", package: "byte-bit-decomposition"),
+                .product(name: "Byte Bit Primitives", package: "swift-byte-primitives"),
+                .product(name: "Byte Primitive", package: "swift-byte-primitives"),
                 .product(name: "Bit Primitive", package: "swift-bit-primitives"),
                 .product(name: "Bit Pattern Primitives", package: "swift-bit-primitives"),
             ]
