@@ -21,9 +21,9 @@
 // brief's intent ("a typed pattern wrapping the byte's bits"); flagged for
 // principal review.
 
-public import Byte_Primitive
-public import Bit_Primitive
 public import Bit_Pattern_Primitives
+public import Bit_Primitive
+public import Byte_Primitive
 
 extension Byte {
     /// The eight bits of this byte as a typed bit pattern over `UInt8`.
