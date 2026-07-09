@@ -12,25 +12,27 @@ import Testing
 
 @testable import Byte_Primitives
 
-@Suite("Byte+Codable")
-struct ByteCodableTests {
+extension Byte {
+    @Suite struct `Codable Test` {
 
-    @Test
-    func `Byte encodes as a single UInt8 value (bare wire form, not keyed)`() throws {
-        let probe = SingleValueEncoderProbe()
-        try Byte(0x2A).encode(to: probe)
-        #expect(probe.recorded.value == 0x2A)
+        @Test
+        func `Byte encodes as a single UInt8 value (bare wire form, not keyed)`() throws {
+            let probe = SingleValueEncoderProbe()
+            try Byte(0x2A).encode(to: probe)
+            #expect(probe.recorded.value == 0x2A)
+        }
     }
 }
 
-@Suite("Byte+CustomStringConvertible")
-struct ByteDescriptionTests {
+extension Byte {
+    @Suite struct `CustomStringConvertible Test` {
 
-    @Test
-    func `Decimal description matches UInt8`() {
-        #expect(Byte(0).description == "0")
-        #expect(Byte(127).description == "127")
-        #expect(Byte(255).description == "255")
+        @Test
+        func `Decimal description matches UInt8`() {
+            #expect(Byte(0).description == "0")
+            #expect(Byte(127).description == "127")
+            #expect(Byte(255).description == "255")
+        }
     }
 }
 
