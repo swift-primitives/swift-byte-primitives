@@ -15,8 +15,8 @@ import Testing
 @Suite("Byte+Codable")
 struct ByteCodableTests {
 
-    @Test("Byte encodes as a single UInt8 value (bare wire form, not keyed)")
-    func encodesAsBareUInt8() throws {
+    @Test
+    func `Byte encodes as a single UInt8 value (bare wire form, not keyed)`() throws {
         let probe = SingleValueEncoderProbe()
         try Byte(0x2A).encode(to: probe)
         #expect(probe.recorded.value == 0x2A)
@@ -26,8 +26,8 @@ struct ByteCodableTests {
 @Suite("Byte+CustomStringConvertible")
 struct ByteDescriptionTests {
 
-    @Test("Decimal description matches UInt8")
-    func decimalDescription() {
+    @Test
+    func `Decimal description matches UInt8`() {
         #expect(Byte(0).description == "0")
         #expect(Byte(127).description == "127")
         #expect(Byte(255).description == "255")
@@ -40,8 +40,11 @@ struct ByteDescriptionTests {
 // `UInt8` underlying (a single-value encode); requesting a keyed/unkeyed container —
 // or encoding a non-`UInt8` value — would be a wire-form regression and traps.
 private struct SingleValueEncoderProbe: Encoder, SingleValueEncodingContainer {
-    final class Recorded { var value: UInt8? }
     let recorded = Recorded()
+}
+
+extension SingleValueEncoderProbe {
+    final class Recorded { var value: UInt8? }
 
     var codingPath: [any CodingKey] { [] }
     var userInfo: [CodingUserInfoKey: Any] { [:] }
