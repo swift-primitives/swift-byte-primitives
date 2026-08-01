@@ -39,7 +39,7 @@ extension Byte.`Bit Test`.Unit {
     @Test
     func `subscript over all-zero byte yields zero everywhere`() {
         let byte: Byte = 0x00
-        for index in 0..<8 {
+        (0..<8).forEach { index in
             #expect(byte[index] == .zero)
         }
     }
@@ -47,16 +47,16 @@ extension Byte.`Bit Test`.Unit {
     @Test
     func `subscript over all-ones byte yields one everywhere`() {
         let byte: Byte = 0xFF
-        for index in 0..<8 {
+        (0..<8).forEach { index in
             #expect(byte[index] == .one)
         }
     }
 
     @Test
     func `subscript matches raw shift-and-mask for every byte and position`() {
-        for value in UInt8.min...UInt8.max {
+        (UInt8.min...UInt8.max).forEach { value in
             let byte = Byte(value)
-            for index in 0..<8 {
+            (0..<8).forEach { index in
                 let expected: Bit = (value >> UInt8(index)) & 1 == 1 ? .one : .zero
                 #expect(byte[index] == expected)
             }
@@ -82,7 +82,7 @@ extension Byte.`Bit Test`.Unit {
 
     @Test
     func `bits popcount matches nonzeroBitCount for every byte`() {
-        for value in UInt8.min...UInt8.max {
+        (UInt8.min...UInt8.max).forEach { value in
             #expect(Byte(value).bits.popcount == value.nonzeroBitCount)
         }
     }
@@ -93,11 +93,13 @@ extension Byte.`Bit Test`.Unit {
 extension Byte.`Bit Test`.Integration {
     @Test
     func `subscript reconstructs the byte by folding the eight bits`() {
-        for value in UInt8.min...UInt8.max {
+        (UInt8.min...UInt8.max).forEach { value in
             let byte = Byte(value)
             var reconstructed: UInt8 = 0
-            for index in 0..<8 where byte[index] == .one {
-                reconstructed |= UInt8(1) << UInt8(index)
+            (0..<8).forEach { index in
+                if byte[index] == .one {
+                    reconstructed |= UInt8(1) << UInt8(index)
+                }
             }
             #expect(reconstructed == value)
         }
@@ -105,11 +107,13 @@ extension Byte.`Bit Test`.Integration {
 
     @Test
     func `bits popcount equals subscript-counted ones`() {
-        for value in UInt8.min...UInt8.max {
+        (UInt8.min...UInt8.max).forEach { value in
             let byte = Byte(value)
             var ones = 0
-            for index in 0..<8 where byte[index] == .one {
-                ones += 1
+            (0..<8).forEach { index in
+                if byte[index] == .one {
+                    ones += 1
+                }
             }
             #expect(byte.bits.popcount == ones)
         }
