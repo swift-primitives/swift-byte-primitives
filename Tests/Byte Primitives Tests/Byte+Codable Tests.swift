@@ -53,7 +53,9 @@ extension SingleValueEncoderProbe {
 
     func singleValueContainer() -> any SingleValueEncodingContainer { self }
     func unkeyedContainer() -> any UnkeyedEncodingContainer { wrongShape() }
-    func container<Key: CodingKey>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key> { wrongShape() }
+    func container<Key: CodingKey>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key> {
+        wrongShape()
+    }
 
     func encode(_ value: UInt8) throws { recorded.value = value }
 
