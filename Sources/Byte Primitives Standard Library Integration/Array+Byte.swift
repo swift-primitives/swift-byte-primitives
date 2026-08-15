@@ -74,7 +74,8 @@ extension RangeReplaceableCollection where Element: Byte.`Protocol` {
     /// Throws `Element.Error` for refined `Element` (see same-shape doc above).
     @_disfavoredOverload
     @inlinable
-    public init<S: Swift.Sequence>(_ source: S) throws(Element.Error) where S.Element: Byte.`Protocol` {
+    public init<S: Swift.Sequence>(_ source: S) throws(Element.Error)
+    where S.Element: Byte.`Protocol` {
         self.init()
         self.reserveCapacity(source.underestimatedCount)
         for x in source {
@@ -140,7 +141,8 @@ extension RangeReplaceableCollection where Element: Byte.`Protocol` {
     /// stdlib's `append(contentsOf:)` allocation profile.
     @_disfavoredOverload
     @inlinable
-    public mutating func append<S: Swift.Sequence>(contentsOf source: S) throws(Element.Error) where S.Element: Byte.`Protocol` {
+    public mutating func append<S: Swift.Sequence>(contentsOf source: S) throws(Element.Error)
+    where S.Element: Byte.`Protocol` {
         self.reserveCapacity(self.count + source.underestimatedCount)
         for x in source {
             self.append(try Element(x.byte))
@@ -154,7 +156,8 @@ extension RangeReplaceableCollection where Element: Byte.`Protocol` {
     /// stdlib's `append(contentsOf:)` allocation profile.
     @_disfavoredOverload
     @inlinable
-    public mutating func append<S: Swift.Sequence>(contentsOf source: S) throws(Element.Error) where S.Element == UInt8 {
+    public mutating func append<S: Swift.Sequence>(contentsOf source: S) throws(Element.Error)
+    where S.Element == UInt8 {
         self.reserveCapacity(self.count + source.underestimatedCount)
         for u in source {
             self.append(try Element(Byte(u)))
