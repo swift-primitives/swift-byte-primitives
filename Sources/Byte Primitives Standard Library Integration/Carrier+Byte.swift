@@ -10,7 +10,7 @@
 // per-type bridge file for each future UInt8 carrier.
 
 public import Byte_Primitives
-public import Carrier_Primitives
+import Carrier_Primitives
 
 extension Carrier.`Protocol` where Underlying == UInt8 {
     /// The `Byte` view of this UInt8 carrier.
