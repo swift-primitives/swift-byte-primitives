@@ -1,13 +1,3 @@
-// Byte+Codable Tests.swift
-//
-// Foundation-free wire-form check for `Byte: Codable`. byte's Codable delegates
-// to its `UInt8` underlying (`underlying.encode(to:)` / `init(UInt8(from:))`) so
-// it serializes as a bare single value (`42`), not a keyed object. That delegation
-// is the only byte-specific behavior, and it is what this suite verifies — via a
-// minimal stdlib-only `Encoder` probe, with no Foundation (`JSONEncoder`), so the
-// primitive stays Foundation-free per [PRIM-FOUND-001]. Round-trip / range / array
-// coverage is intentionally not re-tested: that exercises `UInt8`'s own Codable.
-
 import Testing
 
 @testable import Byte_Primitives
@@ -36,11 +26,6 @@ extension Byte {
     }
 }
 
-// MARK: - Foundation-free single-value Encoder probe
-
-// Records the single `UInt8` written by `Byte.encode(to:)`. byte delegates to its
-// `UInt8` underlying (a single-value encode); requesting a keyed/unkeyed container —
-// or encoding a non-`UInt8` value — would be a wire-form regression and traps.
 private struct SingleValueEncoderProbe: Encoder, SingleValueEncodingContainer {
     let recorded = Recorded()
 }

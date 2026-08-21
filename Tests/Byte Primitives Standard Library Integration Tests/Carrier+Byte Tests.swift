@@ -1,8 +1,6 @@
 import Byte_Primitives_Test_Support
 import Testing
 
-// MARK: - Test Suite Structure
-
 extension Byte {
     @Suite struct `Carrier+Byte Test` {}
 }
@@ -12,8 +10,6 @@ extension Byte.`Carrier+Byte Test` {
     @Suite struct `Edge Case` {}
     @Suite struct Integration {}
 }
-
-// MARK: - Unit
 
 extension Byte.`Carrier+Byte Test`.Unit {
     @Test
@@ -43,8 +39,6 @@ extension Byte.`Carrier+Byte Test`.Unit {
     }
 }
 
-// MARK: - Edge Case
-
 extension Byte.`Carrier+Byte Test`.`Edge Case` {
     @Test
     func `zero round-trips`() {
@@ -60,8 +54,6 @@ extension Byte.`Carrier+Byte Test`.`Edge Case` {
         #expect(UInt8(raw.byte) == 0xFF)
     }
 }
-
-// MARK: - Integration
 
 extension Byte.`Carrier+Byte Test`.Integration {
     @Test

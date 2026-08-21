@@ -1,8 +1,6 @@
 import Byte_Primitives_Test_Support
 import Testing
 
-// MARK: - Test Suite Structure
-
 extension Byte {
     @Suite struct `String+Byte Test` {}
 }
@@ -12,8 +10,6 @@ extension Byte.`String+Byte Test` {
     @Suite struct `Edge Case` {}
     @Suite struct Integration {}
 }
-
-// MARK: - Unit
 
 extension Byte.`String+Byte Test`.Unit {
     @Test
@@ -30,18 +26,16 @@ extension Byte.`String+Byte Test`.Unit {
 
     @Test
     func `decodes valid multi-byte UTF-8 sequence`() {
-        // U+00E9 'é' encodes as 0xC3 0xA9 in UTF-8.
+
         let bytes: [Byte] = [0xC3, 0xA9]
         #expect(String(decoding: bytes, as: UTF8.self) == "é")
     }
 }
 
-// MARK: - Edge Case
-
 extension Byte.`String+Byte Test`.`Edge Case` {
     @Test
     func `invalid UTF-8 produces replacement character`() {
-        // 0x80 alone is a continuation byte with no leading byte — invalid UTF-8.
+
         let bytes: [Byte] = [0x80]
         #expect(String(decoding: bytes, as: UTF8.self) == "\u{FFFD}")
     }
@@ -52,8 +46,6 @@ extension Byte.`String+Byte Test`.`Edge Case` {
         #expect(String(decoding: bytes, as: UTF8.self) == "\u{0000}")
     }
 }
-
-// MARK: - Integration
 
 extension Byte.`String+Byte Test`.Integration {
     @Test

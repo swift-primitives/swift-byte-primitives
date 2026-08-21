@@ -1,8 +1,6 @@
 import Byte_Primitives_Test_Support
 import Testing
 
-// MARK: - Test Suite Structure
-
 extension Byte {
     @Suite struct `Array+Byte Test` {}
 }
@@ -12,8 +10,6 @@ extension Byte.`Array+Byte Test` {
     @Suite struct `Edge Case` {}
     @Suite struct Integration {}
 }
-
-// MARK: - Unit
 
 extension Byte.`Array+Byte Test`.Unit {
     @Test
@@ -37,8 +33,6 @@ extension Byte.`Array+Byte Test`.Unit {
     }
 }
 
-// MARK: - Edge Case
-
 extension Byte.`Array+Byte Test`.`Edge Case` {
     @Test
     func `empty source yields empty result`() {
@@ -56,15 +50,11 @@ extension Byte.`Array+Byte Test`.`Edge Case` {
 
     @Test
     func `accepts non-Array Sequence input`() {
-        // Range<UInt8> is a Sequence with Element == UInt8 (when bounded
-        // appropriately); verify the generic init accepts arbitrary
-        // sequences, not just Arrays.
+
         let bytes = [Byte](stride(from: UInt8(0), to: 4, by: 1))
         #expect(bytes == [Byte(0), Byte(1), Byte(2), Byte(3)])
     }
 }
-
-// MARK: - Integration
 
 extension Byte.`Array+Byte Test`.Integration {
     @Test

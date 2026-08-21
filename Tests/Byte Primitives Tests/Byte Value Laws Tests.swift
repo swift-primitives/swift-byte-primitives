@@ -1,49 +1,19 @@
-// Byte Value Laws Tests.swift
-//
-// The byte-value law fixture (TX-N1A): exhaustive algebraic laws for the
-// canonical byte value type over its full 256-value domain, plus the
-// lifted-law inheritance proof for `Tagged<Tag, Byte>`.
-//
-// The fixture is organised by law family within the canonical sub-suites:
-//
-//   - Unit: round-trip laws (`Byte` <-> `UInt8` injection/projection,
-//     identity initializer, `byte`-axis projection) and Boolean-algebra
-//     laws (involution, De Morgan, identity, annihilator, idempotence,
-//     commutativity, associativity, distributivity, XOR group laws) and
-//     order/equality/hashing laws.
-//   - Edge Case: shift boundary laws (zero-shift identity, saturation at
-//     eight bits, additive composition, masking-shift equivalence) and
-//     the `zero`/`max` extremality laws.
-//   - Integration: protocol-lift laws — `Tagged<Tag, Byte>` inherits every
-//     `Byte.\`Protocol\`` default implementation with identical semantics.
-//
-// The full domain is 256 values; pairwise sweeps are cheap and run
-// exhaustively against the probe set. Triple-quantified laws sample a
-// structured grid so the fixture stays fast while still crossing every
-// boundary value.
-
 import Byte_Primitives_Test_Support
 import Testing
 
-// MARK: - Law Fixtures
-
 extension Byte.Test {
-    /// Shared fixtures for the byte-value law tests.
+
     enum Law {}
 }
 
 extension Byte.Test.Law {
-    /// The full byte-value domain.
+
     static let domain: [Byte] = (UInt8.min...UInt8.max).map { Byte($0) }
 
-    /// Boundary and structurally interesting bytes for quantified laws.
     static let probes: [Byte] = [0x00, 0x01, 0x0F, 0x55, 0x7F, 0x80, 0xAA, 0xF0, 0xFE, 0xFF]
 
-    /// Phantom tag for the `Tagged` protocol-lift laws.
     enum Checksum {}
 }
-
-// MARK: - Round-Trip Laws
 
 extension Byte.Test.Unit {
     @Test
@@ -74,8 +44,6 @@ extension Byte.Test.Unit {
         }
     }
 }
-
-// MARK: - Boolean-Algebra Laws
 
 extension Byte.Test.Unit {
     @Test
@@ -159,8 +127,6 @@ extension Byte.Test.Unit {
     }
 }
 
-// MARK: - Order, Equality and Hashing Laws
-
 extension Byte.Test.Unit {
     @Test
     func `order agrees with the underlying UInt8 order over the domain-probe grid`() {
@@ -178,8 +144,6 @@ extension Byte.Test.Unit {
         #expect(uniqued.count == 256)
     }
 }
-
-// MARK: - Shift and Extremality Laws
 
 extension Byte.Test.`Edge Case` {
     @Test
@@ -232,8 +196,6 @@ extension Byte.Test.`Edge Case` {
         #expect(Byte.max == Byte(0xFF))
     }
 }
-
-// MARK: - Protocol-Lift Laws (Tagged<Tag, Byte>)
 
 extension Byte.Test.Integration {
     @Test

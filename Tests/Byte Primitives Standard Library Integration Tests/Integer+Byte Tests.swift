@@ -1,8 +1,6 @@
 import Byte_Primitives_Test_Support
 import Testing
 
-// MARK: - Test Suite Structure
-
 extension Byte {
     @Suite struct `Integer+Byte Test` {}
 }
@@ -12,8 +10,6 @@ extension Byte.`Integer+Byte Test` {
     @Suite struct `Edge Case` {}
     @Suite struct Integration {}
 }
-
-// MARK: - Unit (Widening conversions)
 
 extension Byte.`Integer+Byte Test`.Unit {
     @Test
@@ -59,8 +55,6 @@ extension Byte.`Integer+Byte Test`.Unit {
     }
 }
 
-// MARK: - Unit (bitPattern conversions)
-
 extension Byte.`Integer+Byte Test`.Unit {
     @Test
     func `Int8 bitPattern preserves bits, treats high bit as sign`() {
@@ -93,8 +87,6 @@ extension Byte.`Integer+Byte Test`.Unit {
     }
 }
 
-// MARK: - Unit (Byte.init?(exactly:))
-
 extension Byte.`Integer+Byte Test`.Unit {
     @Test
     func `Byte exactly succeeds for in-range integer`() {
@@ -115,8 +107,6 @@ extension Byte.`Integer+Byte Test`.Unit {
         #expect(Byte(exactly: Int.max) == nil)
     }
 }
-
-// MARK: - Edge Case
 
 extension Byte.`Integer+Byte Test`.`Edge Case` {
     @Test
@@ -142,8 +132,6 @@ extension Byte.`Integer+Byte Test`.`Edge Case` {
         #expect(Int64(m) == 255)
     }
 }
-
-// MARK: - Integration
 
 extension Byte.`Integer+Byte Test`.Integration {
     @Test

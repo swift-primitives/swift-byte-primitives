@@ -1,8 +1,6 @@
 import Byte_Primitives_Test_Support
 import Testing
 
-// MARK: - Test Suite Structure
-
 extension Byte {
     @Suite struct Test {}
 }
@@ -12,8 +10,6 @@ extension Byte.Test {
     @Suite struct `Edge Case` {}
     @Suite struct Integration {}
 }
-
-// MARK: - Unit
 
 extension Byte.Test.Unit {
     @Test
@@ -99,8 +95,6 @@ extension Byte.Test.Unit {
     }
 }
 
-// MARK: - Edge Case
-
 extension Byte.Test.`Edge Case` {
     @Test
     func `zero byte`() {
@@ -144,8 +138,6 @@ extension Byte.Test.`Edge Case` {
     }
 }
 
-// MARK: - Integration
-
 extension Byte.Test.Integration {
     @Test
     func `Carrier underlying round-trips`() {
@@ -185,7 +177,7 @@ extension Byte.Test.Integration {
             let result = Byte(i) & Byte(0xF0)
             total &+= UInt(result.underlying)
         }
-        // Sum of (i & 0xF0) for i in 0...255 = 16 * (0+16+32+...+240) = 16 * 1920 = 30720
+
         #expect(total == 30720)
     }
 }

@@ -4,8 +4,6 @@ import Byte_Bit_Primitives
 import Byte_Primitives_Test_Support
 import Testing
 
-// MARK: - Test Suite Structure
-
 extension Byte {
     @Suite struct `Bit Test` {}
 }
@@ -15,8 +13,6 @@ extension Byte.`Bit Test` {
     @Suite struct `Edge Case` {}
     @Suite struct Integration {}
 }
-
-// MARK: - Unit: subscript
 
 extension Byte.`Bit Test`.Unit {
     @Test
@@ -64,8 +60,6 @@ extension Byte.`Bit Test`.Unit {
     }
 }
 
-// MARK: - Unit: bits
-
 extension Byte.`Bit Test`.Unit {
     @Test
     func `bits wraps the underlying byte`() {
@@ -87,8 +81,6 @@ extension Byte.`Bit Test`.Unit {
         }
     }
 }
-
-// MARK: - Integration
 
 extension Byte.`Bit Test`.Integration {
     @Test
@@ -119,8 +111,6 @@ extension Byte.`Bit Test`.Integration {
         }
     }
 }
-
-// MARK: - Edge Case
 
 extension Byte.`Bit Test`.`Edge Case` {
     @Test
