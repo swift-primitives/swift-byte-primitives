@@ -25,7 +25,7 @@
         ///
         /// - Throws: An error if the decoder fails to read a `UInt8`.
         @inlinable
-        public init(from decoder: Decoder) throws {
+        public init(from decoder: any Decoder) throws {
             try self.init(UInt8(from: decoder))
         }
 
@@ -33,7 +33,7 @@
         ///
         /// - Throws: An error if the encoder fails to write the `UInt8`.
         @inlinable
-        public func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: any Encoder) throws {
             try underlying.encode(to: encoder)
         }
     }
